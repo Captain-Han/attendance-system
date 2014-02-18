@@ -15,7 +15,7 @@
                 <br>
                              密码：   @user.password
 
-                @form(routes.Application.deleteUser(user.username)) {
+                @form(action = controllers.user.Users.delete(user.id)) {
                     <input type="submit" value="Delete">
                     }
             </p>

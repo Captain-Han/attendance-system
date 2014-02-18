@@ -1,4 +1,4 @@
-@(infoForm: Form[(String,Int)])
+@(user: User)
 
     @import helper._
 
@@ -6,12 +6,9 @@
 
         <h2 align = "center">个人信息修改</h2>
 
-        @form(action = routes.Application.updateUser, args = 'id -> "userForm") {
+        @form(action = controllers.Users.update(user.id), args = 'id -> "userForm") {
           <fieldset>			
-			@input(field = infoForm("sex"), args = '_label -> "性别"){(id,name,value,args) =>
-				    男：<input type = "radio" name = "sex" value = "Male" checked = "checked">
-				    女：<input type = "radio" name = "sex" value = "Female">}			
-			@inputText(infoForm("age"),'_label -> "年龄")	
+			
 		  </fieldset> 
 		  
 		  <input type = "submit" class = "buttons" value = "确认修改">          

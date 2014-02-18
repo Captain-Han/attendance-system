@@ -1,4 +1,4 @@
-@(userForm: Form[(String,String,String,String,String,Int,String,String)])
+@(userForm: Form[User])
 
     @import helper._
 
@@ -6,17 +6,16 @@
 
         <h2 align = "center">新用户</h2>
 
-        @form(action = routes.Application.newUser, args = 'id -> "userForm") {
+        @form(action = controllers.user.Users.register, args = 'id -> "userForm") {
           <fieldset>
-            @inputText(userForm("username"),'_label -> "用户名")
+            @inputText(userForm("username"),'_label -> "用户名",
+            	'_error -> userForm("username").error.map(_withMessage("请输入用户名!")))
 
-			@inputPassword(userForm("password"),'_label -> "密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
+			@inputPassword(userForm("password.main"),'_label -> "密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
 			
-			@inputPassword(userForm("confirmPassword"),'_label -> "确认密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
+			@inputPassword(userForm("password.confirm"),'_label -> "确认密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
 			
-			@input(field = userForm("sex"), args = '_label -> "性别"){(id,name,value,args) =>
-				    男：<input type = "radio" name = "sex" value = "Male" checked = "checked">
-				    女：<input type = "radio" name = "sex" value = "Female">}
+			@inputRadioGroup(UserForm("sex"),options = options("M" -> "Male", "F" -> "Female"))
 			
 			@inputText(userForm("tel"), args = '_label -> "联系电话")
 			

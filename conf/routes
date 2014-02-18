@@ -2,20 +2,17 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+->      /user                       user.Routes
+
 # Home page
-GET     /                       controllers.Application.h
+GET     /login                     	controllers.Application.login
+
+POST		/user/register								controllers.user.Users.register()
+
+GET		/register					controllers.Application.register
 
 # Tasks
-GET     /users                      controllers.Application.users
-POST    /users                      controllers.Application.newUser
-POST    /users/:username/delete     controllers.Application.deleteUser(username: String)
-POST    /login                      controllers.Application.login
-GET     /h                          controllers.Application.h
-GET     /admin                      controllers.Application.admin
-#GET     /info/:username             controllers.Application.info(username: String)
-GET     /info                       controllers.Application.info
-GET     /infoChange                 controllers.Application.infoChange
-POST    /infoChange                 controllers.Application.updateUser
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

@@ -1,4 +1,4 @@
-@(userloginForm: Form[(String,String)])
+@(loginForm: Form[(String,String)])
 
 	@import helper._
 	
@@ -8,11 +8,11 @@
 	 	
 	 	@form(action = routes.Application.login, args = 'id -> "userloginForm"){
 	 		
-	 		@inputText(field = userloginForm("username"), args = '_label -> "用户名", 'placeholder ->"UserName")
+	 		@inputText(field = loginForm("username"), args = '_label -> "用户名", 'placeholder ->"UserName")
           
-			@inputPassword(field = userloginForm("password"),args = '_label -> "密码", 'placeholder ->"Password")
+			@inputPassword(field = loginForm("password"),args = '_label -> "密码", 'placeholder ->"Password")
 			
-            <a href = "users"><input type="button" class = "buttons" value="注册"></a>
+            <a href = "@routes.Application.register"><input type="button" class = "buttons" value="注册"></a>
             
             <input type= "submit" class = "buttons" value="登录">
 	 	}
