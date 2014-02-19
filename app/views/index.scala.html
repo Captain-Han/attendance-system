@@ -6,20 +6,22 @@
 
         <h2 align = "center">新用户</h2>
 
-        @form(action = controllers.user.Users.register, args = 'id -> "userForm") {
+        @form(controllers.user.routes.Users.register(), 'id -> "userForm") {
           <fieldset>
             @inputText(userForm("username"),'_label -> "用户名",
-            	'_error -> userForm("username").error.map(_withMessage("请输入用户名!")))
+            	'_error -> userForm("username").error.map(_.withMessage("请输入用户名!")))
 
 			@inputPassword(userForm("password.main"),'_label -> "密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
 			
 			@inputPassword(userForm("password.confirm"),'_label -> "确认密码",'help ->"A password must be at least 6 characters.", 'class ->"span3")
 			
-			@inputRadioGroup(UserForm("sex"),options = options("M" -> "Male", "F" -> "Female"))
-			
-			@inputText(userForm("tel"), args = '_label -> "联系电话")
+			@inputRadioGroup(userForm("sex"),options = options("M" -> "Male", "F" -> "Female") , '_label -> "性别")
 			
 			@inputText(userForm("age"),'_label -> "年龄")
+			
+			@inputText(userForm("tel"), '_label -> "联系电话")
+			
+			@inputText(userForm("email"), '_label -> "电子邮箱")
 			
 			@select(
             field = userForm("education"), 
@@ -33,6 +35,10 @@
         )
 			
 			@textarea(field = userForm("introduce"), args = '_label ->"自我介绍",'rows ->4, 'cols ->120)
+			
+			@inputText(userForm("added"))
+			
+			@inputText(userForm("updated"))
 			
 			@checkbox(userForm("accept"), '_label -> None, '_text -> "I agree to the Terms and conditions",'_showConstraints -> false)
 	

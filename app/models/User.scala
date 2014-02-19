@@ -51,6 +51,7 @@ trait UserJson {
       Json.obj(
         "id" -> u.id,
         "username" -> u.username,
+        "passsword" -> u.password,
         "sex" -> u.sex,
         "tel" -> u.tel,
         "age" -> u.age,

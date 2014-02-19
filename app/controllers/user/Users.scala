@@ -7,10 +7,8 @@ import controllers.Actions._
 import com.mongodb.casbah.WriteConcern
 import se.radley.plugin.salat._
 import se.radley.plugin.salat.Binders._
-import models._
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.data.format.Formats._
 
 object Users extends Controller {
   val registerForm: Form[User] = Form(
@@ -29,12 +27,14 @@ object Users extends Controller {
       "education" -> text,
       "introduce" -> text,
       "added" -> date,
-      "updated" -> date) {
+      "updated" -> date,
+      "accept" -> boolean
+    ) {
         // Binding: Create a User from the mapping result (ignore the second password and the accept field)
-        (username, password, email, sex, age, tel, education, introduce, added, _) => User(new ObjectId, username, password._1, email, sex, age, tel, education, introduce, added)
+        (username, password, email, sex, age, tel, education, introduce, added, updated, _) => User(new ObjectId, username, password._1, email, sex, age, tel, education, introduce, added, updated)
       } // Unbinding: Create the mapping values from an existing Hacker value
       {
-        user => Some((user.username, (user.password, ""), user.sex, user.age, user.tel, user.email, user.education, user.introduce, user.added, user.updated))
+        user => Some((user.username, (user.password, ""), user.sex, user.age, user.tel, user.email, user.education, user.introduce, user.added, user.updated, false))
       }.verifying(
         // Add an additional constraint: The username must not be taken (you could do an SQL request here)
         "This username is not available",
@@ -54,30 +54,18 @@ object Users extends Controller {
     Ok(views.html.success(u.username))
   }
 
-  /*def register() = Action(parse.json) { implicit request =>
-      request.body.validate[User].fold(
-          valid = { user =>
-         User.save(user, WriteConcern.Safe)
-         Ok(views.html.success(user.username))
-        },
-        invalid = (e => BadRequest(JsError.toFlatJson(e)).as("application/json"))
-      ) 
-  }*/
-  def register = Action {implicit request =>
-    Users.registerForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.index(errors)),
-      {
-       user => User.save(user, WriteConcern.Safe)
-       Ok(views.html.success(user.username))
-      })
+  def register() = JsonAction[User] { user =>
+    User.save(user, WriteConcern.Safe)
+    Ok(Json.toJson(user))
+    Ok(views.html.success(user.username))
   }
-  
+
   def update(id: ObjectId) = JsonAction[User] { requestUser =>
     val user = requestUser.copy(id)
     User.save(user, WriteConcern.Safe)
     Ok(Json.toJson(user))
   }
-  
+
   def delete(id: ObjectId) = JsonAction[User] { requestUser =>
     User.removeById(id)
     Ok("")

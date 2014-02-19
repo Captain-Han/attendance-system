@@ -9,3 +9,7 @@ libraryDependencies ++= Seq(
 )
 
 play.Project.playScalaSettings
+
+routesImport += "se.radley.plugin.salat.Binders._"
+    
+templatesImport += "org.bson.types.ObjectId"

@@ -6,7 +6,7 @@
 	 	
 	 	<h2>用户登录</h2>
 	 	
-	 	@form(action = routes.Application.login, args = 'id -> "userloginForm"){
+	 	@form(action = controllers.user.routes.Users.login, args = 'id -> "userloginForm"){
 	 		
 	 		@inputText(field = loginForm("username"), args = '_label -> "用户名", 'placeholder ->"UserName")
           
