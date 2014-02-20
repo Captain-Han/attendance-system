@@ -1,0 +1,49 @@
+@* UserInfomation Template File *@
+@(userForm: Form[User], user : User)
+ @import helper._
+ 
+    @main("用户注册") {
+
+        <h2 align = "center">用户信息</h2>
+       
+        @form(controllers.user.routes.Users.update(user.id), 'id -> "userForm") {
+          <fieldset>
+           	@inputText(userForm("id"), '_style -> "hidden")
+          
+            @inputText(userForm("username"),'_label -> "用户名", '_readonly ->"readonly")
+            
+            @inputPassword(userForm("password"),'_label -> "密码", '_style -> "hidden")
+			
+			@inputRadioGroup(userForm("sex"),options = options("M" -> "男", "F" -> "女") , '_label -> "性别")
+			
+			@inputText(userForm("age"),'_label -> "年龄")
+		 	@inputText(userForm("tel"), '_label -> "联系电话")
+			
+			@inputText(userForm("email"), '_label -> "电子邮箱")
+			
+			@select(
+            field = userForm("education"), 
+            options = options(
+                "中专及以下" -> "中专及以下",
+                "大专" -> "大专",
+                "本科" -> "本科",
+                "研究生及以上" -> "研究生及以上"
+            ),
+            args = '_label -> "学历"
+        )
+			
+			@textarea(field = userForm("introduce"),'_label ->"自我介绍",'rows ->4, 'cols ->120)
+			
+			@inputDate(userForm("added"), '_label -> "注册时间")
+			
+			@inputDate(userForm("updated"), '_label -> "更新时间")
+			
+			
+		  </fieldset>            
+            <input type = "submit" class = "buttons" value="更新">
+            
+            <a herf = "@controllers.user.routes.Users.show(user.username)"><input type = "reset" class = "buttons" value="取消">
+           
+        }
+
+    }

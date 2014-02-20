@@ -26,7 +26,9 @@ case class User(
                  updated: Date = new Date()
                  )
 
-object User extends UserDAO with UserJson
+//object User extends UserDAO with UserJson
+
+object User extends UserDAO
 
 trait UserDAO extends ModelCompanion[User, ObjectId] {
   def collection = mongoCollection("users")
@@ -43,7 +45,7 @@ trait UserDAO extends ModelCompanion[User, ObjectId] {
 
 /**
  * Trait used to convert to and from json
- */
+ *//*
 trait UserJson {
 
   implicit val userJsonWrite = new Writes[User] {
@@ -76,4 +78,4 @@ trait UserJson {
     (__ \ 'added).read[Date] ~
     (__ \ 'updated).read[Date]
   )(User.apply _)
-}
+}*/

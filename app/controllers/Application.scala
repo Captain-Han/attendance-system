@@ -17,6 +17,6 @@ object Application extends Controller {
   }
 
   def register() = Action {
-    Ok(views.html.index(Users.registerForm))
+    Ok(views.html.register(Users.registerForm))
   }
 }

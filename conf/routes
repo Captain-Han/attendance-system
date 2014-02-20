@@ -4,20 +4,22 @@
 
 
 # Home page
-GET		/								controllers.Application.index()
+GET			/								controllers.Application.index()
 
-GET		/login							controllers.Application.login()
+GET			/login							controllers.Application.login()
 
-GET		/register						controllers.Application.register()
+GET			/register						controllers.Application.register()
 
-POST	/login							controllers.user.Users.login()
+POST		/login							controllers.user.Users.login()
 
-GET		/registersubmit					controllers.user.Users.register()
+POST		/registersubmit					controllers.user.Users.register()
 
-PUT		/update/:id						controllers.user.Users.update(id:ObjectId)
+GET			/updateUser/:id					controllers.user.Users.update(id :ObjectId)
 
-DELETE	/delete/:id						controllers.user.Users.delete(id:ObjectId)
+GET			/showUser/:username				controllers.user.Users.show(username :String)
+
+#DELETE		/delete/:id						controllers.user.Users.delete(id:ObjectId)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               	controllers.Assets.at(path="/public", file)
+GET     	/assets/*file               	controllers.Assets.at(path="/public", file)

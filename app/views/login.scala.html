@@ -10,7 +10,8 @@
 	 		
 	 		@inputText(field = loginForm("username"), args = '_label -> "用户名", 'placeholder ->"UserName")
           
-			@inputPassword(field = loginForm("password"),args = '_label -> "密码", 'placeholder ->"Password")
+			@inputPassword(field = loginForm("password"),args = '_label -> "密码", 'placeholder ->"Password" ,
+				'_error -> loginForm.globalError.map(_.withMessage("用户名或密码错误，请重新输入!")))
 			
             <a href = "@routes.Application.register"><input type="button" class = "buttons" value="注册"></a>
             
