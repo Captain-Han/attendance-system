@@ -21,6 +21,8 @@ object Application extends Controller {
     Ok(views.html.register(Users.registerForm))
   }
   
-  
+  def contact() = Action {
+    Ok(views.html.contact.form(Contacts.contactForm()))
+  }
   
 }

@@ -69,7 +69,7 @@ object Contacts extends Controller {
   }
   
    
-   def contact() = Action {
+   def edit() = Action {
     val id = new ObjectId("531449caeae5657fa2e9a24a")
     Ok(views.html.contact.edit(Contacts.contactForm().fill(Contact.findOneByID(id).get), id))
   }

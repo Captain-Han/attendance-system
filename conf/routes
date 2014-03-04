@@ -18,11 +18,13 @@ GET			/updateUser/:id					controllers.user.Users.update(id :ObjectId)
 
 GET			/showUser/:username				controllers.user.Users.show(username :String)
 
-GET			/contact						controllers.contact.Contacts.contact()
+GET			/contact						controllers.Application.contact()
+
+GET		/edit							controllers.contact.Contacts.edit()
 
 POST		/create							controllers.contact.Contacts.submit()
 
-POST		/update/:id							controllers.contact.Contacts.update(id:ObjectId)
+POST		/update/:id						controllers.contact.Contacts.update(id:ObjectId)
 
 #DELETE		/delete/:id						controllers.user.Users.delete(id:ObjectId)
 
