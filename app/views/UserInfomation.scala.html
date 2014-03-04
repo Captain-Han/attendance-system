@@ -8,11 +8,13 @@
        
         @form(controllers.user.routes.Users.update(user.id), 'id -> "userForm") {
           <fieldset>
-           	@inputText(userForm("id"), '_style -> "hidden")
-          
-            @inputText(userForm("username"),'_label -> "用户名", '_readonly ->"readonly")
+           	
+           	<input type="hidden" name="id" value="@user.id" />
+			<input type="hidden" name="password" value="@user.password" />
+			
+            @inputText(userForm("username"),'_label -> "用户名", 'readonly ->"true")
             
-            @inputPassword(userForm("password"),'_label -> "密码", '_style -> "hidden")
+
 			
 			@inputRadioGroup(userForm("sex"),options = options("M" -> "男", "F" -> "女") , '_label -> "性别")
 			
@@ -34,9 +36,9 @@
 			
 			@textarea(field = userForm("introduce"),'_label ->"自我介绍",'rows ->4, 'cols ->120)
 			
-			@inputDate(userForm("added"), '_label -> "注册时间")
+			@inputDate(userForm("added"), '_label -> "注册时间" , 'readonly ->"true")
 			
-			@inputDate(userForm("updated"), '_label -> "更新时间")
+			@inputDate(userForm("updated"), '_label -> "更新时间", 'readonly ->"true")
 			
 			
 		  </fieldset>            

@@ -5,6 +5,7 @@ import play.api._
 import controllers.Actions._
 import models._
 import controllers.user.Users
+import controllers.contact.Contacts
 
 object Application extends Controller {
 
@@ -19,4 +20,7 @@ object Application extends Controller {
   def register() = Action {
     Ok(views.html.register(Users.registerForm))
   }
+  
+  
+  
 }

@@ -20,13 +20,12 @@ case class User(
                  age: Int,
                  tel: String,
                  email: String,
+                 //adds: Address,
                  education: String,
                  introduce: String,
                  added: Date = new Date(),
                  updated: Date = new Date()
                  )
-
-//object User extends UserDAO with UserJson
 
 object User extends UserDAO
 
@@ -42,40 +41,3 @@ trait UserDAO extends ModelCompanion[User, ObjectId] {
   def findByEmail(email: String) = dao.find(MongoDBObject("email" -> email))
   def authenticate(username: String, password: String): Option[User] = findOne(DBObject("username" -> username, "password" -> password))
 }
-
-/**
- * Trait used to convert to and from json
- *//*
-trait UserJson {
-
-  implicit val userJsonWrite = new Writes[User] {
-    def writes(u: User): JsValue = {
-      Json.obj(
-        "id" -> u.id,
-        "username" -> u.username,
-        "passsword" -> u.password,
-        "sex" -> u.sex,
-        "tel" -> u.tel,
-        "age" -> u.age,
-        "email" ->u.email,
-        "education" -> u.education,
-        "introduce" -> u.introduce,
-        "added" -> u.added,
-        "updated" -> u.updated
-      )
-    }
-  }
-  implicit val userJsonRead = (
-    (__ \ 'id).read[ObjectId] ~
-    (__ \ 'username).read[String] ~
-    (__ \ 'password).read[String] ~
-    (__ \ 'sex).read[String] ~
-    (__ \ 'age).read[Int] ~
-    (__ \ 'tel).read[String] ~
-    (__ \ 'email).read[String] ~
-    (__ \ 'education).read[String] ~
-    (__ \ 'introduce).read[String] ~
-    (__ \ 'added).read[Date] ~
-    (__ \ 'updated).read[Date]
-  )(User.apply _)
-}*/

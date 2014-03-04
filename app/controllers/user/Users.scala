@@ -29,7 +29,7 @@ object Users extends Controller {
       "introduce" -> text,
       "accept" -> checked("")) {
         // Binding: Create a User from the mapping result (ignore the second password and the accept field)
-        (username, password, sex, age, tel, email, education, introduce, _) => User(new ObjectId, username, password._1, sex, age, tel, email, education, introduce, new Date(), new Date())
+        (username, password, sex, age, tel, email, education, introduce, _) => User(new ObjectId, username, password._1, sex, age, tel, email,/* new Address(null,null,null,null,null) :: Nil, */education, introduce, new Date(), new Date())
       } // Unbinding: Create the mapping values from an existing Hacker value
       {
         user => Some((user.username, (user.password, ""), user.sex, user.age, user.tel, user.email, user.education, user.introduce, false))
@@ -89,7 +89,7 @@ object Users extends Controller {
   }*/
   def register = Action { implicit request =>
     Users.registerForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.message(errors)),
+      errors => BadRequest(views.html.message1(errors)),
       {
         user =>
           User.save(user, WriteConcern.Safe)
@@ -99,7 +99,7 @@ object Users extends Controller {
 
   def update(id: ObjectId) = Action { implicit request =>
     Users.userForm.bindFromRequest.fold(
-      errors => BadRequest(views.html.message(errors)),
+      errors => BadRequest(views.html.message1(errors)),
       {
         user =>
           User.save(user.copy(id = id), WriteConcern.Safe)
