@@ -20,7 +20,6 @@ case class User(
                  age: Int,
                  tel: String,
                  email: String,
-                 //adds: Address,
                  education: String,
                  introduce: String,
                  added: Date = new Date(),

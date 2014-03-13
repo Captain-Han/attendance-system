@@ -28,7 +28,7 @@ POST        /update/:id                controllers.contact.Contacts.update(id:Ob
 
 GET 		/imgs					   controllers.Application.imgs()
 
-POST         /upload                    controllers.Application.upload()
+POST        /upload                    controllers.Application.upload_tmp()
 
 GET         /photos/:file              controllers.Application.getPhoto(file: ObjectId)
 
